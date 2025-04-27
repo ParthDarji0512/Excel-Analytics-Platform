@@ -3,8 +3,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import connectDB from "./utils/db.js"; 
 import dotenv from "dotenv";
+import userRoutes from "./routes/userRoutes.js"
 
-dotenv.config({});
+dotenv.config();
 
 const app = express(); 
 
@@ -14,7 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: ["http://localhost:5173"],
+  origin: process.env.FRONTEND_URL,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
@@ -28,7 +29,7 @@ app.get('/', (req, res) => {
 });
 
 //api routes
-
+app.use('/api/users', userRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => { 
