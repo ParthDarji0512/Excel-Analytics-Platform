@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import connectDB from "./utils/db.js"; 
 import dotenv from "dotenv";
 import userRoutes from "./routes/userRoutes.js"
+import uploadRoutes from './routes/uploadRoutes.js';
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
 
 //api routes
 app.use('/api/users', userRoutes);
+app.use('/api/uploads', uploadRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => { 
